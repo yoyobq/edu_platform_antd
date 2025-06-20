@@ -1,35 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.tsx
+import React, { Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
+import ProtectedRoute from './router/ProtectedRoute';
+import { routes } from './router/routes';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => (
+  <BrowserRouter>
+    <MainLayout>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map((route) =>
+            route.path === '/login' ? (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ) : (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={<ProtectedRoute path={route.path}>{route.element}</ProtectedRoute>}
+              />
+            )
+          )}
+        </Routes>
+      </Suspense>
+    </MainLayout>
+  </BrowserRouter>
+);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
-
-export default App
+export default App;
