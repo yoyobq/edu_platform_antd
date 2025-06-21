@@ -2,8 +2,8 @@
 import { Menu } from 'antd';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { currentUser, hasAccess } from '../access/rbac';
-import { routes } from '../router/routes';
+import { currentUser, hasAccess } from '../../access/rbac';
+import { routes } from '../../router/routes';
 
 const MenuSider: React.FC = () => {
   const location = useLocation();
