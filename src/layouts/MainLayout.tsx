@@ -1,32 +1,37 @@
+// src/layouts/MainLayout.tsx
 import { Layout } from 'antd';
 import React from 'react';
+import HeaderBar from '../components/HeaderBar/HeaderBar';
 import MenuSider from '../components/MenuSider/MenuSider';
-// import HeaderBar from '../components/HeaderBar'; // 可自定义
-// import FooterBar from '../components/FooterBar'; // 可自定义
-import styles from './MainLayout.module.css'; // 引入同名 CSS Modules
+import styles from './MainLayout.module.css';
 
-const { Sider, Content } = Layout;
+const { Sider, Header, Content } = Layout;
 
-const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <Layout className={styles.root}>
-  <Sider
-    width={240}
-    breakpoint="lg"
-    collapsedWidth={60}
-    className={styles.sider}
-  >
-    <MenuSider />
-  </Sider>
-    <Layout>
-      {/* <Header className={styles.header}>
+const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <Layout className={styles.root}>
+      {/* 顶部Header横跨整个宽度 */}
+      <Header className={styles.header}>
         <HeaderBar />
-      </Header> */}
-      <Content className={styles.content}>{children}</Content>
-      {/* <Footer className={styles.footer}>
-        <FooterBar />
-      </Footer> */}
+      </Header>
+      
+      {/* 下方左右布局 */}
+      <Layout className={styles.body}>
+        <Sider
+          width={240}
+          breakpoint="lg"
+          collapsedWidth={60}
+          className={styles.sider}
+        >
+          <MenuSider />
+        </Sider>
+        
+        <Content className={styles.content}>
+          {children}
+        </Content>
+      </Layout>
     </Layout>
-  </Layout>
-);
+  );
+};
 
 export default MainLayout;
