@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PageSkeleton } from './layouts/PageSkeleton';
 import ProtectedRoute from './router/ProtectedRoute';
 import { routes } from './router/routes';
 
@@ -17,10 +18,13 @@ const App: React.FC = () => (
             element
           );
 
-          // 决定是否使用 Layout 包裹
-          if (Layout) {
-            content = <Layout>{content}</Layout>;
-          }
+          content = Layout ? (
+            <Layout>
+              <Suspense fallback={<PageSkeleton />}>{content}</Suspense>
+            </Layout>
+          ) : (
+            <Suspense fallback={<PageSkeleton />}>{content}</Suspense>
+          );
 
           return <Route key={path} path={path} element={content} />;
         })}
