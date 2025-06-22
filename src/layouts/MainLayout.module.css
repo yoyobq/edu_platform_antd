@@ -30,8 +30,8 @@
 
 /* 左侧侧边栏 */
 .sider {
-  background-color: var(--ant-color-bg-container);
-  border-right: 1px solid var(--ant-color-border-secondary);
+  background-color: var(--ant-color-bg-layout);
+  border-right: 1px solid var(--ant-color-border);
   height: 100%;
   z-index: 1;
   flex-shrink: 0;

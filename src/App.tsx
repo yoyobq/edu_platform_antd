@@ -40,7 +40,8 @@ const App: React.FC = () => {
   return (
     <ConfigProvider 
       theme={{ 
-        algorithm: appState.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm 
+        algorithm: appState.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        cssVar: true 
       }}
     >
       <BrowserRouter
