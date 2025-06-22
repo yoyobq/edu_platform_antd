@@ -1,5 +1,7 @@
+// src/App.tsx
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AppStateProvider } from './components/AppStateProvider/AppStateProvider';
 import { useResponsiveFontSize } from './hooks/useResponseiveFontSize';
 import { PageSkeleton } from './layouts/PageSkeleton';
 import ProtectedRoute from './router/ProtectedRoute';
@@ -13,11 +15,11 @@ const App: React.FC = () => {
 
   const renderRoute = (route: RouteConfig) => {
     const { path, element, layout: Layout, permission } = route;
-    const isProtected = typeof permission === 'function';
+    const isProtected = permission !== true; // 如果不是 true，则需要权限检查
 
     // 包装受保护的页面
     let content = isProtected ? (
-      <ProtectedRoute path={path}>{element}</ProtectedRoute>
+      <ProtectedRoute permission={permission}>{element}</ProtectedRoute>
     ) : (
       element
     );
@@ -34,18 +36,20 @@ const App: React.FC = () => {
   };
 
   return (
-    <BrowserRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          {allRoutes.map(renderRoute)}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <AppStateProvider>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {allRoutes.map(renderRoute)}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </AppStateProvider>
   );
 };
 
