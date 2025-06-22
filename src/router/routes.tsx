@@ -1,7 +1,7 @@
 import { HomeOutlined, LoginOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
-import type { ReactElement } from 'react';
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import MainLayout from '../layouts/MainLayout';
+import { type RouteConfig } from './types';
 
 const Home = lazy(() => import('../pages/Home'));
 // const Admin = lazy(() => import('../pages/Admin/Admin'));
@@ -9,17 +9,6 @@ const UsersManagement = lazy(() => import('../pages/admin/UsersManagement/UsersM
 const Settings = lazy(() => import('../pages/admin/Settings/Settings'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Login = lazy(() => import('../pages/Login'));
-
-// 定义路由类型接口
-interface RouteConfig {
-  path: string;
-  element?: ReactElement;
-  label: string;
-  permission: boolean | ((user: { roles: string[] }) => boolean);
-  layout?: React.ComponentType<any> | null;
-  children?: RouteConfig[];
-  icon?: React.ReactNode; // 新增 icon 字段
-}
 
 const routes: RouteConfig[] = [
   {
