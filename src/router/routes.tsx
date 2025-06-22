@@ -23,7 +23,7 @@ const routes: RouteConfig[] = [
     path: '/admin',
     element: <Settings />,
     label: '后台管理',
-    permission: (user: { roles: string[] }) => user.roles.includes('admin'),
+    permission: 'canAdmin', // 使用 AccessPermissions 中的权限键
     layout: MainLayout,
     icon: <SettingOutlined />,
     children: [
@@ -31,14 +31,14 @@ const routes: RouteConfig[] = [
         path: '/admin/users',
         element: <UsersManagement />,
         label: '用户管理',
-        permission: (user: { roles: string[] }) => user.roles.includes('admin'),
+        permission: 'canAdmin', // 使用 AccessPermissions 中的权限键
         layout: MainLayout,
       },
       {
         path: '/admin/settings',
         element: <Settings />,
         label: '系统设置',
-        permission: (user: { roles: string[] }) => user.roles.includes('admin'),
+        permission: 'canAdmin', // 使用 AccessPermissions 中的权限键
         layout: MainLayout,
       },
     ],

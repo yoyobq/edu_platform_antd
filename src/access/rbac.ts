@@ -1,4 +1,4 @@
-import type { AccessPermissions, InitialState, Role, RoleHierarchy } from './types';
+import type { AccessPermissions, Role, RoleHierarchy } from './types';
 
 /**
  * RBAC (Role-Based Access Control) 基于角色的访问控制系统
@@ -80,7 +80,7 @@ function expandRoles(roles: Role[], hierarchy: RoleHierarchy): Role[] {
 /**
  * 构建权限访问对象，供全局权限检查使用
  * 
- * @param initialState - 包含当前用户信息的初始状态
+ * @param appState - 包含当前用户信息的初始状态
  * @returns 权限检查对象，包含各角色的权限检查函数
  * 
  * 使用方式：
@@ -96,9 +96,9 @@ function expandRoles(roles: Role[], hierarchy: RoleHierarchy): Role[] {
  * 2. 通过 expandRoles 计算所有有效权限
  * 3. 返回各角色的权限检查函数
  */
-export default function access(initialState: InitialState): AccessPermissions {
+export default function access({ accessGroup }: { accessGroup?: Role[] }): AccessPermissions {
   // 获取用户角色，默认为空数组
-  const userRoles = initialState.currentUser?.accessGroup ?? [];
+  const userRoles = accessGroup ?? [];
   
   // 计算用户的所有有效权限（包括继承权限）
   const effectiveRoles = expandRoles(userRoles, roleHierarchy);
