@@ -1,6 +1,8 @@
 // src/App.tsx
+import { ConfigProvider, theme } from 'antd';
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useAppState } from './hooks/useAppState';
 import { useResponsiveFontSize } from './hooks/useResponseiveFontSize';
 import { PageSkeleton } from './layouts/PageSkeleton';
 import ProtectedRoute from './router/ProtectedRoute';
@@ -8,6 +10,7 @@ import { flattenRoutes, routes, type RouteConfig } from './router/routes';
 
 const App: React.FC = () => {
   useResponsiveFontSize();
+  const appState = useAppState();
 
   // 扁平化所有路由（包括子路由）
   const allRoutes = flattenRoutes(routes);
@@ -35,18 +38,24 @@ const App: React.FC = () => {
   };
 
   return (
-    <BrowserRouter
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
+    <ConfigProvider 
+      theme={{ 
+        algorithm: appState.theme === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm 
       }}
     >
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          {allRoutes.map(renderRoute)}
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {allRoutes.map(renderRoute)}
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </ConfigProvider>
   );
 };
 

@@ -1,7 +1,7 @@
 // src/components/AppStateProvider/AppStateProvider.tsx
 import React, { createContext, useEffect, useState } from 'react';
 import access from '../../access/rbac';
-import type { AppState, CurrentUser } from './types';
+import type { AppState, CurrentUser, Theme } from './types';
 
 export const AppStateContext = createContext<AppState | null>(null);
 
@@ -11,14 +11,30 @@ interface Props {
 }
 
 export const AppStateProvider: React.FC<Props> = ({ children, overrideUser }) => {
-  const [state, setState] = useState<AppState | null>(null);
+  const [currentUser, setCurrentUser] = useState<CurrentUser | null>(null);
+  const [theme, setTheme] = useState<Theme>(() => {
+    // 从localStorage读取保存的主题，默认为light
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    return savedTheme || 'light';
+  });
+
+  // 主题切换函数
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    // 更新document的data-theme属性，用于CSS变量切换
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
+  useEffect(() => {
+    // 初始化时设置主题
+    document.documentElement.setAttribute('data-theme', theme);
+  }, []);
 
   useEffect(() => {
     if (overrideUser) {
-      setState({
-        currentUser: overrideUser,
-        access: access({ accessGroup: overrideUser.accessGroup }),
-      });
+      setCurrentUser(overrideUser);
     } else {
       // fetch('/api/currentUser')
       //   .then((res) => res.json())
@@ -33,15 +49,19 @@ export const AppStateProvider: React.FC<Props> = ({ children, overrideUser }) =>
 
           // const safeUser = user?.accessGroup?.length ? user : fallbackUser;
 
-          setState({
-            currentUser: safeUser,
-            access: access({ accessGroup: safeUser.accessGroup }),
-          });
+          setCurrentUser(safeUser);
         // });
     }
   }, [overrideUser]);
 
-  if (!state) return <div>加载中...</div>; // 也可以返回 loading...
+  if (!currentUser) return <div>加载中...</div>; // 也可以返回 loading...
+
+  const state: AppState = {
+    currentUser,
+    access: access({ accessGroup: currentUser.accessGroup }),
+    theme,
+    toggleTheme,
+  };
 
   return (
     <AppStateContext.Provider value={state}>
