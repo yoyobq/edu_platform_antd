@@ -1,22 +1,39 @@
+// src/MenuSider/MenuSider.tsx
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { currentUser, hasAccess } from '../../access/rbac';
+import { useAppState } from '../../hooks/useAppState';
 import { routes, type RouteConfig } from '../../router/routes';
-
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const MenuSider: React.FC = () => {
   const location = useLocation();
+  const { access } = useAppState();
+
+  // 判断是否允许显示该路由
+  const hasPermission = (permission: RouteConfig['permission']) => {
+    if (typeof permission === 'boolean') return permission;
+    if (typeof permission === 'string') return access[permission];
+    return false;
+  };
+
+  // 判断路由是否应该显示在菜单中
+  const shouldShowInMenu = (route: RouteConfig) => {
+    // 过滤掉 layout 为 null 的路由（如登录页面）
+    return route.layout !== null && hasPermission(route.permission);
+  };
 
   const createMenuItem = (route: RouteConfig): MenuItem | null => {
-    const { children, icon } = route;
+    const { children, icon, permission, layout } = route;
+
+    // 如果路由本身不应该显示在菜单中，直接返回 null
+    if (layout === null) return null;
 
     if (children?.length) {
       const childrenItems = children
-        .filter((child) => hasAccess(child.path, currentUser))
+        .filter((child) => shouldShowInMenu(child))
         .map((child) => ({
           key: child.path,
           label: <Link to={child.path}>{child.label}</Link>,
@@ -26,13 +43,13 @@ const MenuSider: React.FC = () => {
 
       return {
         key: route.path,
-        label: route.label, // 父级不跳转
+        label: route.label,
         icon,
         children: childrenItems,
       };
     }
 
-    if (hasAccess(route.path, currentUser)) {
+    if (hasPermission(permission)) {
       return {
         key: route.path,
         label: <Link to={route.path}>{route.label}</Link>,
@@ -44,16 +61,16 @@ const MenuSider: React.FC = () => {
   };
 
   const menuItems: MenuItem[] = routes
-    .map((r) => createMenuItem(r))
-    .filter((i): i is MenuItem => i !== null);
+    .map(createMenuItem)
+    .filter((item): item is MenuItem => item !== null);
 
   return (
-      <Menu
-        mode="inline"
-        selectedKeys={[location.pathname]}
-        defaultOpenKeys={['/admin']}
-        items={menuItems}
-      />
+    <Menu
+      mode="inline"
+      selectedKeys={[location.pathname]}
+      defaultOpenKeys={['/admin']}
+      items={menuItems}
+    />
   );
 };
 
