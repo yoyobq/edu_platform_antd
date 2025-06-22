@@ -37,6 +37,7 @@
   flex-shrink: 0;
   width: 15rem;         /* 保底定义，防止被覆盖 */
   min-width: 15rem;
+  position: relative;   /* 添加相对定位，作为 CollapseTrigger 的定位参考 */
 }
 
 /* 右侧主内容区 */
@@ -46,4 +47,8 @@
   padding: 24px;
   background: #f5f5f5;
   min-height: 0;
+}
+
+CollapseTrigger {
+  right: -0.7rem;
 }
