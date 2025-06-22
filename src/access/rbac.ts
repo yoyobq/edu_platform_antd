@@ -16,7 +16,7 @@ export const currentUser: User = {
 
 // 菜单与权限映射
 export const roleMenu = {
-  admin: ['/', '/admin', '/profile'],
+  admin: ['/', '/admin', '/admin/users', '/admin/settings', '/profile'],
   teacher: ['/', '/profile'],
   student: ['/', '/profile'],
 };

@@ -1,25 +1,58 @@
-import { lazy } from 'react';
+import { HomeOutlined, LoginOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import type { ReactElement } from 'react';
+import React, { lazy } from 'react';
 import MainLayout from '../layouts/MainLayout';
 
 const Home = lazy(() => import('../pages/Home'));
-const Admin = lazy(() => import('../pages/Admin/Admin'));
+// const Admin = lazy(() => import('../pages/Admin/Admin'));
+const UsersManagement = lazy(() => import('../pages/admin/UsersManagement/UsersManagement'));
+const Settings = lazy(() => import('../pages/admin/Settings/Settings'));
 const Profile = lazy(() => import('../pages/Profile'));
 const Login = lazy(() => import('../pages/Login'));
 
-export const routes = [
+// 定义路由类型接口
+interface RouteConfig {
+  path: string;
+  element?: ReactElement;
+  label: string;
+  permission: boolean | ((user: { roles: string[] }) => boolean);
+  layout?: React.ComponentType<any> | null;
+  children?: RouteConfig[];
+  icon?: React.ReactNode; // 新增 icon 字段
+}
+
+const routes: RouteConfig[] = [
   {
     path: '/',
     element: <Home />,
     label: '首页',
     permission: true,
     layout: MainLayout,
+    icon: <HomeOutlined />,
   },
   {
     path: '/admin',
-    element: <Admin />,
+    element: <Settings />,
     label: '后台管理',
-    permission: (user: { roles: string | string[] }) => user.roles.includes('admin'),
+    permission: (user: { roles: string[] }) => user.roles.includes('admin'),
     layout: MainLayout,
+    icon: <SettingOutlined />,
+    children: [
+      {
+        path: '/admin/users',
+        element: <UsersManagement />,
+        label: '用户管理',
+        permission: (user: { roles: string[] }) => user.roles.includes('admin'),
+        layout: MainLayout,
+      },
+      {
+        path: '/admin/settings',
+        element: <Settings />,
+        label: '系统设置',
+        permission: (user: { roles: string[] }) => user.roles.includes('admin'),
+        layout: MainLayout,
+      },
+    ],
   },
   {
     path: '/profile',
@@ -27,12 +60,35 @@ export const routes = [
     label: '个人信息',
     permission: true,
     layout: MainLayout,
+    icon: <UserOutlined />,
   },
   {
     path: '/login',
     element: <Login />,
     label: '登录',
     permission: true,
-    layout: null, // 不使用任何 layout
+    layout: null,
+    icon: <LoginOutlined />,
   },
 ];
+
+// 修改扁平化辅助函数 - 包含所有路由（父路由和子路由）
+const flattenRoutes = (routes: RouteConfig[]): RouteConfig[] => {
+  const result: RouteConfig[] = [];
+
+  for (const route of routes) {
+    // 添加当前路由（包括父路由）
+    result.push(route);
+    
+    // 如果有子路由，递归添加子路由
+    if (route.children && route.children.length > 0) {
+      result.push(...flattenRoutes(route.children));
+    }
+  }
+
+  return result;
+};
+
+export { flattenRoutes, routes };
+export type { RouteConfig };
+
