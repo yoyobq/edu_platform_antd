@@ -1,0 +1,91 @@
+/* ========================================
+  🌐 global.css - 全局基础样式
+======================================== */
+
+/* -------- 1. 现代化 CSS Reset（推荐使用） -------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* -------- 2. 页面基础结构 -------- */
+html {
+  height: 100%;
+  width: 100%;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+  color: #333;
+  /* 基础字体大小，配合 useResponsiveFontSize */
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #fff;
+  /* 使用 rem 单位，响应 html font-size 变化 */
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* -------- 3. 列表样式重置 -------- */
+ol, ul, li {
+  list-style: none;
+}
+
+/* -------- 4. 表格样式重置 -------- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* -------- 5. 链接样式 -------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1890ff;
+}
+
+/* -------- 6. 滚动条优化（可选） -------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
