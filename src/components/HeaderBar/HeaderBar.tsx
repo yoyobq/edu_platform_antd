@@ -1,7 +1,7 @@
 // src/components/HeaderBar/HeaderBar.tsx
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Avatar, Dropdown, Space, Typography } from 'antd';
+import { Avatar, Dropdown, Typography } from 'antd';
 import React from 'react';
 import styles from './HeaderBar.module.css';
 
@@ -32,12 +32,22 @@ const HeaderBar: React.FC = () => {
 
   return (
     <div className={styles.header}>
+      {/* 左侧LOGO和标题 */}
+      <div className={styles.left}>
+        <div className={styles.logo}>
+          {/* 这里可以放置实际的LOGO图片 */}
+          <div className={styles.logoIcon}></div>
+        </div>
+        <Text className={styles.title}>Edu Platform</Text>
+      </div>
+      
+      {/* 右侧用户信息 */}
       <div className={styles.right}>
         <Dropdown menu={{ items }} placement="bottomRight">
-          <Space className={styles.avatarWrapper}>
-            <Avatar size="small" icon={<UserOutlined />} />
-            <Text className={styles.userName}>Alex</Text>
-          </Space>
+          <div className={styles.avatarWrapper}>
+              <Avatar size="large" icon={<UserOutlined />} />
+              <span className={styles.userName}>Alex</span>
+          </div>
         </Dropdown>
       </div>
     </div>
