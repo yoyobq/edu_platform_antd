@@ -1,0 +1,26 @@
+.menuSider {
+  padding-top: 0.8rem;
+  height: 100%;
+  background-color: var(--ant-color-bg-container);
+  border: none;
+}
+
+.menuSider .ant-menu {
+  height: 100%;
+  background-color: transparent;
+  border-right: none;
+}
+
+.menuSider .ant-menu-item,
+.menuSider .ant-menu-submenu {
+  border-radius: 0;
+}
+
+.menuSider .ant-menu-item-selected {
+  background-color: var(--ant-color-primary-bg);
+}
+
+.menuSider .ant-menu-item:hover,
+.menuSider .ant-menu-submenu-title:hover {
+  background-color: var(--ant-color-fill-tertiary);
+}

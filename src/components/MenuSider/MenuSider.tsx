@@ -5,6 +5,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppState } from '../../hooks/useAppState';
 import { routes, type RouteConfig } from '../../router/routes';
+import styles from './MenuSider.module.css';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -65,12 +66,14 @@ const MenuSider: React.FC = () => {
     .filter((item): item is MenuItem => item !== null);
 
   return (
-    <Menu
-      mode="inline"
-      selectedKeys={[location.pathname]}
-      defaultOpenKeys={['/admin']}
-      items={menuItems}
-    />
+    <div className={styles.menuSider}>
+      <Menu
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        defaultOpenKeys={['/admin']}
+        items={menuItems}
+      />
+    </div>
   );
 };
 
