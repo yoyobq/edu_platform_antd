@@ -32,10 +32,10 @@ const HeaderBar: React.FC = () => {
 
   return (
     <div className={styles.header}>
-      {/* 左侧LOGO和标题 */}
+      {/* 左侧 LOGO 和标题 */}
       <div className={styles.left}>
         <div className={styles.logo}>
-          {/* 这里可以放置实际的LOGO图片 */}
+          {/* LOGO图片 url 在 CSS 设置 */}
           <div className={styles.logoIcon}></div>
         </div>
         <Text className={styles.title}>Edu Platform</Text>
