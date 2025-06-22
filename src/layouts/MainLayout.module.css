@@ -31,10 +31,12 @@
 /* 左侧侧边栏 */
 .sider {
   background: #fff;
-  border-right: 1px solid #e5e6eb; /* ✅ 关键线条分隔 */
+  border-right: 1px solid #e5e6eb;
   height: 100%;
   z-index: 1;
   flex-shrink: 0;
+  width: 15rem;         /* 保底定义，防止被覆盖 */
+  min-width: 15rem;
 }
 
 /* 右侧主内容区 */

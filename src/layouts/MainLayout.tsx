@@ -18,9 +18,9 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       {/* 下方左右布局 */}
       <Layout className={styles.body}>
         <Sider
-          width={240}
+          width="15rem"
+          collapsedWidth="3.75rem"
           breakpoint="lg"
-          collapsedWidth={60}
           className={styles.sider}
         >
           <MenuSider />
