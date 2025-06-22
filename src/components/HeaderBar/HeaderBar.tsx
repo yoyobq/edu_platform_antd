@@ -31,7 +31,7 @@ const HeaderBar: React.FC = () => {
   ];
 
   return (
-    <div className={styles.header}>
+    <div className={styles.barContent}>
       {/* 左侧 LOGO 和标题 */}
       <div className={styles.left}>
         <div className={styles.logo}>
