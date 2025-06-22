@@ -1,10 +1,13 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useResponsiveFontSize } from './hooks/useResponseiveFontSize';
 import { PageSkeleton } from './layouts/PageSkeleton';
 import ProtectedRoute from './router/ProtectedRoute';
 import { routes } from './router/routes';
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  useResponsiveFontSize(); 
+  return (
   <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
@@ -31,6 +34,6 @@ const App: React.FC = () => (
       </Routes>
     </Suspense>
   </BrowserRouter>
-);
+)};
 
 export default App;
