@@ -23,7 +23,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Sider
           collapsed={collapsed}
           onCollapse={(val) => setCollapsed(val)}
-          width="15rem"
+          width="12rem"
           collapsedWidth="3.75rem"
           breakpoint="lg"
           className={styles.sider}

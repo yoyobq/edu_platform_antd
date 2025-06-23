@@ -35,8 +35,6 @@
   height: 100%;
   z-index: 1;
   flex-shrink: 0;
-  width: 15rem;         /* 保底定义，防止被覆盖 */
-  min-width: 15rem;
   position: relative;   /* 添加相对定位，作为 CollapseTrigger 的定位参考 */
 }
 

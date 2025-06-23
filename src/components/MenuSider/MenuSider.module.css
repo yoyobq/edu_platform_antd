@@ -1,14 +1,27 @@
 .menuSider {
   padding-top: 0.8rem;
   height: 100%;
+  /* width: 100%;  让 MenuSider 占满父容器宽度 */
   background-color: var(--ant-color-bg-container);
   border: none;
+  padding-right: 0 !important;  /* 强制移除 padding-right */
 }
 
 .menuSider .ant-menu {
   height: 100%;
   background-color: transparent;
   border-right: none;
+  padding-right: 0 !important;  /* 强制移除 Menu 的 padding-right */
+}
+
+/* 更具体的选择器来覆盖 Ant Design 默认样式 */
+.menuSider .ant-menu.ant-menu-root {
+  padding-right: 0 !important;
+}
+
+.menuSider .ant-menu .ant-menu-item,
+.menuSider .ant-menu .ant-menu-submenu {
+  padding-right: 0 !important;
 }
 
 .menuSider .ant-menu-item,
@@ -23,4 +36,10 @@
 .menuSider .ant-menu-item:hover,
 .menuSider .ant-menu-submenu-title:hover {
   background-color: var(--ant-color-fill-tertiary);
+}
+
+:where(.css-dev-only-do-not-override-7ggrph).ant-menu-light.ant-menu-root.ant-menu-inline,
+:where(.css-dev-only-do-not-override-7ggrph).ant-menu-light .ant-menu-root.ant-menu-inline {
+  border-inline-end-width: 0 !important;
+  border-inline-end: none !important;  /* 保险加上 */
 }

@@ -22,6 +22,6 @@
 } */
 
 .collapseTrigger:hover :global(svg) {
-  color: #1890ff;
+  /* color: #1890ff; */
   transform: scale(1.1);
 }

@@ -72,6 +72,7 @@ const MenuSider: React.FC = () => {
         selectedKeys={[location.pathname]}
         defaultOpenKeys={['/admin']}
         items={menuItems}
+        style={{ borderInlineEndWidth: 0 }}
       />
     </div>
   );
