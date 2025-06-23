@@ -1,10 +1,10 @@
-// src/pages/Login.tsx
+// src/pages/Login/Login.tsx
 import React from 'react';
 
 const Login: React.FC = () => {
   return (
     <div>
-      登陆吧，登陆呀！
+      Login
     </div>
   );
 };

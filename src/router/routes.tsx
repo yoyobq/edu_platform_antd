@@ -1,4 +1,4 @@
-import { HomeOutlined, LoginOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { lazy } from 'react';
 import MainLayout from '../layouts/MainLayout';
 import { type RouteConfig } from './types';
@@ -8,7 +8,10 @@ const Home = lazy(() => import('../pages/Home'));
 const UsersManagement = lazy(() => import('../pages/admin/UsersManagement/UsersManagement'));
 const Settings = lazy(() => import('../pages/admin/Settings/Settings'));
 const Profile = lazy(() => import('../pages/Profile'));
-const Login = lazy(() => import('../pages/Login'));
+const Login = lazy(() => import('../pages/auth/Login/Login'));
+const Register = lazy(() => import('../pages/auth/Register/Register'));
+const ForgotPassword = lazy(() => import('../pages/auth/ForgotPassword/ForgotPassword'));
+
 
 const routes: RouteConfig[] = [
   {
@@ -57,7 +60,20 @@ const routes: RouteConfig[] = [
     label: '登录',
     permission: true,
     layout: null,
-    icon: <LoginOutlined />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
+    label: '注册',
+    permission: true,
+    layout: null,
+  },
+  {
+    path: '/forgot-password',
+    element: <ForgotPassword />,
+    label: '找回密码',
+    permission: true,
+    layout: null,
   },
 ];
 
