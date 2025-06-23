@@ -4,7 +4,7 @@ import MainLayout from '../layouts/MainLayout';
 import { type RouteConfig } from './types';
 
 const Home = lazy(() => import('../pages/Home'));
-// const Admin = lazy(() => import('../pages/Admin/Admin'));
+
 const UsersManagement = lazy(() => import('../pages/admin/UsersManagement/UsersManagement'));
 const Settings = lazy(() => import('../pages/admin/Settings/Settings'));
 const Profile = lazy(() => import('../pages/Profile'));

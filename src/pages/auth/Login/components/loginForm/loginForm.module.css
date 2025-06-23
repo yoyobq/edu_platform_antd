@@ -1,0 +1,110 @@
+/* loginForm.css */
+
+.login-form-root {
+  width: 100%;
+  max-width: 24rem; /* 384px, 适合常见登录卡片宽度 */
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 1.125rem; /* 18px */
+  box-shadow: 0 0.375rem 2rem 0 rgba(24, 60, 170, 0.08); /* 6px 32px */
+  padding: 2.4rem 2rem 1.8rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* antd 表单项间距优化 */
+.login-form-root .ant-form-item {
+  margin-bottom: 1.2rem;
+}
+
+/* 主色块按钮和图标 */
+.login-form-root .ant-btn-primary,
+.login-form-root .ant-btn-primary:active,
+.login-form-root .ant-btn-primary:focus {
+  background: var(--antd-color-primary);
+  border-color: var(--antd-color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.125rem;
+  border-radius: 0.75rem;
+  height: 2.5rem;
+}
+
+/* 输入框样式调整 */
+.login-form-root .ant-input,
+.login-form-root .ant-input-password {
+  font-size: 1rem;
+  border-radius: 0.625rem;
+  background: #f7faff;
+  border: 1px solid #e6eaf3;
+  padding-left: 2.2rem;
+}
+
+.login-form-root .ant-input-affix-wrapper {
+  border-radius: 0.625rem;
+  background: #f7faff;
+  border: 1px solid #e6eaf3;
+}
+
+.login-form-root .ant-input-affix-wrapper .anticon {
+  color: var(--antd-color-primary);
+  font-size: 1.15rem;
+}
+
+/* 分割线美化 */
+.login-form-root .ant-divider {
+  margin: 1.1rem 0 0.8rem 0;
+  color: #b3b7c9;
+  font-size: 0.95rem;
+}
+
+/* 注册按钮 */
+.login-form-root .ant-btn[type="primary"] {
+  width: 70%;
+  margin-right: 0.7rem;
+}
+
+/* 忘记密码 */
+.login-form-root a {
+  color: var(--antd-color-primary);
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.login-form-root a:hover {
+  color: var(--antd-color-primary-hover, #4096ff);
+  text-decoration: underline;
+}
+
+/* 微信扫码区块 */
+.login-form-root .wechat-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.login-form-root .wechat-qr .anticon {
+  font-size: 2.1rem;
+  color: var(--antd-color-primary);
+}
+.login-form-root .wechat-qr-desc {
+  font-size: 0.92rem;
+  color: #787c92;
+  margin-top: 0.1rem;
+}
+
+/* 响应式：小屏优化 */
+@media (max-width: 480px) {
+  .login-form-root {
+    max-width: 100vw;
+    padding: 1.4rem 0.7rem 1.2rem 0.7rem;
+    border-radius: 0.6rem;
+    box-shadow: 0 0.12rem 0.75rem 0 rgba(24, 60, 170, 0.08);
+    gap: 0.7rem;
+  }
+  .login-form-root .ant-btn[type="primary"] {
+    width: 100%;
+    margin-right: 0;
+  }
+}
