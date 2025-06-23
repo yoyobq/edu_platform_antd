@@ -2,6 +2,7 @@
 import { ConfigProvider, theme } from 'antd';
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import TitleUpdater from './components/Titleupdater/Titleupdater';
 import { useAppState } from './hooks/useAppState';
 import { useResponsiveFontSize } from './hooks/useResponseiveFontSize';
 import { PageSkeleton } from './layouts/PageSkeleton';
@@ -14,7 +15,7 @@ const App: React.FC = () => {
 
   // 扁平化所有路由（包括子路由）
   const allRoutes = flattenRoutes(routes);
-
+  
   const renderRoute = (route: RouteConfig) => {
     const { path, element, layout: Layout, permission } = route;
     const isProtected = permission !== true; // 如果不是 true，则需要权限检查
@@ -44,12 +45,8 @@ const App: React.FC = () => {
         cssVar: true 
       }}
     >
-      <BrowserRouter
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true,
-        }}
-      >
+      <BrowserRouter>
+        <TitleUpdater allRoutes={allRoutes} />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             {allRoutes.map(renderRoute)}
