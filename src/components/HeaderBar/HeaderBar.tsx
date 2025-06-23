@@ -1,7 +1,7 @@
 // src/components/HeaderBar/HeaderBar.tsx
-import { LogoutOutlined, UserOutlined, SunOutlined, MoonOutlined } from '@ant-design/icons';
+import { LogoutOutlined, MoonOutlined, SunOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Avatar, Dropdown, Typography, Button } from 'antd';
+import { Avatar, Button, Dropdown, Typography } from 'antd';
 import React from 'react';
 import { useAppState } from '../../hooks/useAppState';
 import styles from './HeaderBar.module.css';
@@ -57,7 +57,7 @@ const HeaderBar: React.FC = () => {
         
         <Dropdown menu={{ items }} placement="bottomRight">
           <div className={styles.avatarWrapper}>
-              <Avatar size="large" icon={<UserOutlined />} />
+              <Avatar icon={<UserOutlined />} />
               <span className={styles.userName}>{appState.currentUser?.name}</span>
           </div>
         </Dropdown>

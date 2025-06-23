@@ -9,7 +9,7 @@
 /* 顶部栏 */
 /* MainLayout.module.css */
 .header {
-  height: 64px;
+  height: 56px;
   padding: 0 24px;
   display: flex;
   align-items: center;
