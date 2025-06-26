@@ -5,12 +5,13 @@
   flex-direction: column;
   background: linear-gradient(135deg,
             #e6f4ff 0%,
-            #f0f8ff 25%,
-            #e6f7ff 50%,
-            #f0f8ff 75%,
+            #f0f8ff 20%,
+            #e6f7ff 40%,
+            #f0f8ff 60%,
+            #e8f5e8 80%,
             #e6f4ff 100%);
   background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  animation: gradientBG 18s ease infinite;
   justify-content: space-between;
   position: relative;
 }
@@ -25,9 +26,9 @@
   background-image:
     url("https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg");
   background-repeat: no-repeat;
-  background-position: center 110px;
+  background-position: center 120px;
   background-size: 100%;
-  opacity: 0.05;
+  opacity: 0.04;
   pointer-events: none;
 }
 
@@ -35,14 +36,17 @@
   0% {
     background-position: 0% 50%;
   }
-  25% {
-    background-position: 100% 50%;
+  20% {
+    background-position: 100% 30%;
   }
-  50% {
-    background-position: 100% 100%;
+  40% {
+    background-position: 100% 70%;
   }
-  75% {
+  60% {
     background-position: 50% 100%;
+  }
+  80% {
+    background-position: 0% 70%;
   }
   100% {
     background-position: 0% 50%;
@@ -54,13 +58,13 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start; /* 添加这个属性，确保顶端对齐 */
-  gap: 3.5rem;
+  align-items: flex-start;
+  gap: 4rem;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 25vh;
-  padding-bottom: 2vh;
+  padding-top: 22vh;
+  padding-bottom: 3vh;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
@@ -71,7 +75,6 @@
   display: block;
   flex: 0 0 60%;
   max-width: 60%;
-  /* 移除 height: 100%，让内容决定高度 */
 }
 
 /* 登录表单区：始终显示 */
@@ -79,20 +82,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* 移除 align-self: center，因为不再需要 */
 }
 
 /* slogan 区：大屏隐藏，小屏显示 */
 .sloganWrap {
   display: none;
-}
-
-/* 登录表单区：始终显示 */
-.loginFormWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* 移除flex相关设置，让内部的loginFormRoot控制宽度 */
 }
 
 /* 使用 Ant Design 标准断点 */
@@ -105,7 +99,11 @@
   }
 
   .loginFormWrap {
-    flex: 0 0 auto; /* 让内容决定宽度 */
+    flex: 0 0 auto;
+  }
+  
+  .mainArea {
+    gap: 4.5rem;
   }
 }
 
@@ -117,7 +115,11 @@
   }
 
   .loginFormWrap {
-    flex: 0 0 auto; /* 让内容决定宽度 */
+    flex: 0 0 auto;
+  }
+  
+  .mainArea {
+    gap: 3rem;
   }
 }
 
@@ -125,13 +127,11 @@
 @media screen and (max-width: 991px) {
   .mainArea {
     flex-direction: column;
-    gap: 1.3rem;
-    /* 调整整体位置，减少顶部距离 */
-    padding-top: 15vh;
-    padding-bottom: 5vh;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    /* 确保内容居中对齐 */
+    gap: 1.5rem;
+    padding-top: 16vh;
+    padding-bottom: 6vh;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
     align-items: center;
     justify-content: flex-start;
   }
@@ -142,15 +142,13 @@
   
   .sloganWrap {
     display: block;
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.8rem;
     width: 100%;
-    /* 确保slogan水平居中 */
     display: flex;
     justify-content: center;
   }
   
   .loginFormWrap {
-    /* 确保loginform水平居中 */
     flex: 0 0 auto;
     display: flex;
     justify-content: center;
@@ -161,9 +159,19 @@
 /* 小屏：调整内边距和整体位置 */
 @media screen and (max-width: 575px) {
   .mainArea {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    /* 进一步调整小屏下的位置 */
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    padding-top: 14vh;
+    gap: 1.2rem;
+  }
+}
+
+/* 超小屏适配 */
+@media screen and (max-width: 380px) {
+  .mainArea {
+    padding-left: 1rem;
+    padding-right: 1rem;
     padding-top: 12vh;
+    gap: 1rem;
   }
 }

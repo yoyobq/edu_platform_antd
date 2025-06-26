@@ -33,7 +33,7 @@ const SiteIntroduceComp: React.FC = () => {
         <div>
           <div className={styles.platformLogo}>
             <img src="/logo.svg" alt="平台Logo" />
-            <span>Edu Platform</span>
+            <span>智能教学平台</span>
           </div>
 
           <div className={styles.platformTitle}>欢迎使用 Edu Platform</div>
