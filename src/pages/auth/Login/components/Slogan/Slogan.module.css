@@ -1,6 +1,5 @@
 .sloganRoot {
-  width: 100%;
-  max-width: 24rem;
+  width: 380px;
   margin: 0 auto;
   text-align: center;
   color: var(--antd-color-primary, #4096ff);
@@ -23,6 +22,40 @@
   animation: sloganFadeIn 1.1s cubic-bezier(.57,.21,.69,1.25) both;
 }
 
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.firstLine,
+.secondLine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.keyWord {
+  color: #ff6b35;
+  font-weight: 800;
+  text-shadow: 0 0.1rem 0.3rem rgba(255, 107, 53, 0.3);
+  position: relative;
+  padding: 0 0.2rem;
+}
+
+.keyWord::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #ff6b35, #ff8c42);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
 @keyframes sloganFadeIn {
   0% {
     opacity: 0;
@@ -41,17 +74,4 @@
   font-family: Georgia, serif;
   opacity: 0.75;
   text-shadow: 0 0.1rem 0.5rem rgba(64,150,255,0.13);
-}
-
-@media (max-width: 700px) {
-  .sloganRoot {
-    font-size: 1.15rem;
-    padding: 1rem 0.5rem 0.7rem 0.5rem;
-    border-radius: 0.7rem;
-    max-width: 100vw;
-  }
-  .highlight {
-    font-size: 1.35rem;
-    margin: 0 0.18rem;
-  }
 }
