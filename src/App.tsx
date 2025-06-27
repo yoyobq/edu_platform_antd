@@ -45,7 +45,12 @@ const App: React.FC = () => {
         cssVar: true 
       }}
     >
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <TitleUpdater allRoutes={allRoutes} />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
