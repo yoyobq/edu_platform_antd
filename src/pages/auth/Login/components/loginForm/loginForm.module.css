@@ -142,35 +142,6 @@
   margin-bottom: 22px;
 }
 
-/* ===== 滑动验证码样式 ===== */
-.sliderCaptcha {
-  width: 100%;
-  margin: 28px 0 20px 0;
-}
-
-.sliderButton {
-  height: 52px;
-  border-radius: 14px;
-  font-size: 17px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #1890ff, #40a9ff, #69c0ff);
-  border: none;
-  box-shadow: 0 10px 20px rgba(24, 144, 255, 0.35);
-  color: #ffffff;
-  transition: all 0.3s ease;
-  width: 100% !important;
-  box-sizing: border-box;
-}
-
-.sliderButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(24, 144, 255, 0.45);
-  background: linear-gradient(135deg, #096dd9, #1890ff, #40a9ff);
-}
-
-.sliderButton:active {
-  transform: translateY(-1px);
-}
 
 /* ===== 按钮样式 ===== */
 .forgotPasswordButton {

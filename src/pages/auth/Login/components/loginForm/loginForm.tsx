@@ -2,6 +2,8 @@
 
 import { LockOutlined, MailOutlined, UserAddOutlined, WechatOutlined } from '@ant-design/icons';
 import { Button, Divider, Form, Input, Space, Tabs, Typography, message } from 'antd';
+import type { VerifyParam } from 'rc-slider-captcha';
+import SliderCaptcha from 'rc-slider-captcha';
 import React, { useState } from 'react';
 import styles from './loginForm.module.css';
 
@@ -20,9 +22,31 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const handleSliderVerify = () => {
-    const values = form.getFieldsValue();
-    handleSubmit(values);
+  const handleSliderVerify = async (data: VerifyParam) => {
+    console.log('滑块验证数据:', data);
+    try {
+      // 在slider模式下，可以通过移动轨迹、持续时间等判断是否为人工操作
+      // 这里是简单的验证逻辑示例
+      const { duration, trail, x } = data;
+      
+      // 基本的人机验证逻辑：
+      // 1. 操作时间不能太短（防止机器人）
+      // 2. 移动轨迹应该有一定的波动（人工操作特征）
+      const isValidDuration = duration > 300; // 至少300ms
+      const isValidTrail = trail.length > 5; // 轨迹点数量
+      const isValidPosition = x > 250; // 滑动距离足够（假设总宽度320px）
+      
+      if (isValidDuration && isValidTrail && isValidPosition) {
+        message.success('验证成功！');
+        const values = form.getFieldsValue();
+        handleSubmit(values);
+        return Promise.resolve();
+      } else {
+        return Promise.reject('验证失败，请重试');
+      }
+    } catch (error) {
+      return Promise.reject('验证失败，请重试');
+    }
   };
 
   return (
@@ -78,16 +102,30 @@ const LoginForm: React.FC = () => {
               />
             </Form.Item>
 
-            {/* 滑动验证码占位符 */}
+            {/* 纯滑块验证码 - 使用 slider 模式 */}
             <div className={styles.sliderCaptcha}>
-              <Button
-                block
-                size="large"
-                onClick={handleSliderVerify}
-                className={styles.sliderButton}
-              >
-                滑动验证登录
-              </Button>
+              <SliderCaptcha
+                mode="slider"
+                bgSize={{ width: 304, height: 48 }}
+                onVerify={handleSliderVerify}
+                tipText={{
+                  default: '请滑动验证登录',
+                  moving: '请继续拖动滑块',
+                  verifying: '验证中...',
+                  success: '验证成功',
+                  error: '验证失败，请重试'
+                }}
+                autoRefreshOnError={true}
+                errorHoldDuration={1000}
+                limitErrorCount={3}
+                style={{ width: '100%' }}
+                styles={{
+                  control: {
+                    height: '48px',
+                    borderRadius: '14px'
+                  }
+                }}
+              />
             </div>
           </>
         )}
